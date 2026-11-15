@@ -1,0 +1,94 @@
+CANLI TÜRKÇE ALTYAZI  -  sürüm 1.0.0
+====================================
+
+Konsol oyununu (PS5, Xbox, Switch...) capture card üzerinden bilgisayar
+ekranında gösterir, ekrandaki İngilizce altyazıyı okur ve Türkçesini aynı
+yerin üstüne yazar.
+
+
+GEREKENLER
+----------
+- Windows 10 ya da 11 (64 bit)
+- Bir capture card (HDMI görüntüsünü USB'den bilgisayara aktaran aygıt)
+- Windows'ta İngilizce yazı tanıma paketi:
+    Ayarlar > Saat ve Dil > Dil ve Bölge > Dil ekle > English (United States)
+  Paket yoksa program açılışta uyarır; okuma hatalı olur.
+- Çeviri için internet bağlantısı (Google Çeviri kullanılır)
+- İsteğe bağlı: daha iyi argo çevirisi için Ollama ve bir model
+    https://ollama.com  adresinden kurulur, ardından:   ollama pull gemma3:12b
+  Güçlü bir ekran kartı gerekir (yaklaşık 8 GB ekran kartı belleği).
+
+
+İLK AÇILIŞ
+----------
+1. Konsolu capture card'a, capture card'ı bilgisayara bağla.
+   PS5'te HDCP kapalı olmalı:  Ayarlar > Sistem > HDMI > HDCP'yi Etkinleştir
+2. Programı aç. Görüntü ve ses aygıtını sorar; capture card'ını seç.
+3. Oyunda İngilizce altyazı çıkınca F2'ye bas ve altyazının çıktığı alanı
+   fareyle çiz. Bu bir kez yapılır, kaydedilir.
+4. Görev metinleri için aynısını F3 ile yap (isteğe bağlı).
+
+Bölgeleri dar tut: yalnızca yazının çıktığı alanı çiz, mini haritayı ve
+manzarayı içine alma. Dar bölge hem daha doğru hem daha hızlı okunur.
+
+
+TUŞLAR
+------
+F2          Altyazı bölgesini seç
+F3          Görev metni bölgesini seç
+F4          Çeviriyi aç / kapat
+F6          Parlak yazı filtresi
+F11         Tam ekran (çift tık da olur)
++  /  -     Yazıyı büyüt / küçült
+Esc         Seçimden ya da tam ekrandan çık
+Sağ tık     Menü: çeviri motoru, görüntü ve ses aygıtı, diğer ayarlar
+
+
+ÇEVİRİ MOTORLARI  (sağ tık > Çeviri motoru)
+-------------------------------------------
+Yalnız Google            En hızlısı. Argoda ve küfürde zayıf.
+Yalnız yerel yapay zekâ  Ollama gerekir. Argoyu daha iyi çevirir, yaklaşık
+                         1 saniye sürer. İnternet gerekmez.
+Hızlı + kaliteli         Önce Google'ın çevirisi görünür, yerel yapay
+                         zekânınki hazır olunca yerine geçer.
+
+Google çok sık istek gelirse bağlantıyı bir süre kısıtlayabilir. Program
+bunu fark edince 10 dakika Google'a istek atmaz; Ollama kuruluysa onunla
+devam eder.
+
+
+SIK SORUNLAR
+------------
+Görüntü yok / siyah ekran
+    Konsolda HDCP açıktır ya da kartı başka bir program (OBS gibi)
+    kullanıyordur. Kartı aynı anda tek program açabilir.
+Görüntü bozuk, çizgili
+    Kartın USB kablosunu çıkarıp 10 saniye sonra mavi (USB 3.0) bir girişe
+    doğrudan tak. HDMI kablolarını da kontrol et.
+Görüntü bulanık
+    Konsol çıkışını 1080p ve HDR kapalı yap. Çoğu kart en fazla 1080p
+    yakalar ve 4K/HDR sinyali kendi içinde kötü küçültür.
+Ses çift geliyor
+    Sağ tık > Ses aygıtı > "Sesi programdan çal" işaretini kaldır.
+Anlamsız çeviriler çıkıyor
+    Bölge çok geniştir. F2 / F3 ile yalnızca yazının çıktığı alanı çiz.
+Canlı yayın (OBS)
+    OBS'e capture card'ı ekleme; "Ekran Yakalama" ile programın açık
+    olduğu monitörü yakala.
+
+
+AYARLARIN YERİ
+--------------
+%APPDATA%\CanliTurkceAltyazi  klasöründe iki dosya tutulur:
+    ayarlar.json           seçtiğin aygıtlar, bölgeler, yazı boyutu
+    ceviri_onbellek.json   daha önce çevrilmiş satırlar
+Programı kaldırmak bu dosyaları silmez; sıfırlamak için klasörü silebilirsin.
+
+
+NOTLAR
+------
+- Program oyunun kendisini değiştirmez; yalnızca ekrandaki görüntüyü okur.
+- Çevrilecek altyazı metni çeviri için Google'a gönderilir. Yalnız yerel
+  yapay zekâ modunda hiçbir şey bilgisayarından dışarı çıkmaz.
+- Bu program herhangi bir oyun ya da konsol üreticisiyle bağlantılı değildir.
+- Qt (PySide6, LGPL lisanslı) ve FFmpeg kitaplıklarını içerir.

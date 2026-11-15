@@ -1,0 +1,12 @@
+# Paketleme çıktıları
+build/
+dist/
+__pycache__/
+*.pyc
+
+# Kurulum dosyaları depoya değil, Releases sayfasına yüklenir
+Releases-icin/
+
+# Kişisel ayarlar ve çeviri hafızası
+ayarlar.json
+ceviri_onbellek.json
